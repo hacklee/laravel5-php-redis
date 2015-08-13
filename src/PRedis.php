@@ -55,12 +55,17 @@ class PRedis
 		foreach ($servers as $key => $server) {
 			
 			$redis = new \Redis;
-			
+			//长连接为pconnect,长连接要注意执行close关闭
 			$func =Arr::get($server,'persistent',false) ? 'pconnect' : 'connect';
 			
 			$redis->connect(Arr::get($server, 'host',''), Arr::get($server, 'port'), $this->timeOut);
-			$redis->select(Arr::get($server,'database'));
+			//有配置密码的，进行auth操作
+			if ($pwd = Arr::get($server, 'password', '')) {
+				$redis->auth($pwd);
+			}
 			
+			$redis->select(Arr::get($server,'database'));
+			//设置redis的option,如Redis::OPT_SERIALIZER, Redis::SERIALIZER_NONE
 			foreach ($options as $key => $val) {
 				$redis->setOption($key, $val);
 			}
