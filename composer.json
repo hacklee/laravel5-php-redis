@@ -1,7 +1,7 @@
 {
     "name": "hacklee/laravel5-php-redis",
     "description": "Use The Redis PHP-Extention In The Laravel Framework With Facde Pattern.",
-    "keywords": ["redis", "laravel"],
+    "keywords": ["laravel5", "redis","laravel","redis.so"],
     "license": "MIT",
     "require": {
         "php":">=5.3",
