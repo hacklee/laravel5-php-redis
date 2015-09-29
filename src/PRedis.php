@@ -110,6 +110,39 @@ class PRedis
 		return call_user_func_array([$this->clients['default'], $method], $parameters);
 	}
 	
+	/**
+	 * 从redis获取一个值string，若值不存在，则返回闭包的值且存储
+	 *
+	 * @param  string  $key
+	 * @param  int  $seconds
+	 * @param  \Closure  $callback
+	 * @return mixed
+	 */
+	public function stringRemember($key, $seconds, \Closure $callback)
+	{
+		if (($value = $this->get($key)) !== false) {
+			return $value;
+		}
+		$this->set($key, $value = $callback(), $seconds);
+		return $value;
+	}
+	
+	/**
+	 * 从redis的获取一个哈希key值，若值不存在，则返回闭包的值且存储
+	 *
+	 * @param  string  $hashName
+	 * @param  string  $key
+	 * @param  \Closure  $callback
+	 * @return mixed
+	 */
+	public function hashRemember($hash, $key, \Closure $callback)
+	{
+		if (($value = $this->hGet($hash, $key)) !== false) {
+			return $value;
+		}
+		$this->hSet($hash, $key, $value = $callback());
+		return $value;
+	}
 	
 	/**
 	 * 动态执行命令
