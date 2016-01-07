@@ -49,11 +49,11 @@ Hacklee\PRedisServiceProvider::class
 - 在app.php的aliases节点下增加以下代码
 
 ```
-'PRedis' => Hacklee\PRedisFacde::class
+'PRedis' => Hacklee\PRedisFacade::class
 ```
 或
 ```
-'PRedis' => 'Hacklee\PRedisFacde'
+'PRedis' => 'Hacklee\PRedisFacade'
 ```
 
 ### 使用示例
