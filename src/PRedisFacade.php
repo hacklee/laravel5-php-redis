@@ -4,7 +4,7 @@ namespace Hacklee;
 
 use Illuminate\Support\Facades\Facade;
 
-class PRedisFacde extends Facade
+class PRedisFacade extends Facade
 {
 	/**
 	 * Get the registered name of the component.
