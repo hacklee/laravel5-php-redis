@@ -13,7 +13,7 @@
             "email": "517184100@qq.com"
         }
     ],
-    "minimum-stability" : "dev",
+    "minimum-stability" : "1.0",
     "autoload": {
         "psr-4": {
             "Hacklee\\": "src/"
