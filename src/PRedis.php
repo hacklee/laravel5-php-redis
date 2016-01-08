@@ -20,9 +20,17 @@ class PRedis
 
 	/**
 	 * 连接超时时间
+	 * 
 	 * @var unknown
 	 */
 	protected $timeOut;
+	
+	/**
+	 * 当前Redis实例，默认default
+	 *
+	 * @var \Redis
+	 */
+	protected $curConnection;
 	
 	/**
 	 * 根据配置文件初始化client
@@ -39,6 +47,8 @@ class PRedis
 		$this->clients = $this->createClients($servers, $options);
 		
 		$this->timeOut = $timeOut;
+		
+		$this->curConnection = $this->clients['default'];
 	}
 	
 	/**
@@ -107,7 +117,7 @@ class PRedis
 	 */
 	public function command($method, array $parameters = [])
 	{
-		return call_user_func_array([$this->clients['default'], $method], $parameters);
+		return call_user_func_array([$this->curConnection, $method], $parameters);
 	}
 	
 	/**
