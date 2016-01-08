@@ -95,7 +95,8 @@ class PRedis
 	 */
 	public function connection($name = 'default')
 	{
-		return Arr::get($this->clients, $name ?: 'default');
+		$this->curConnection = Arr::get($this->clients, $name ?  : 'default');
+        return $this->curConnection;
 	}
 	
 	/**
